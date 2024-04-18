@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <script src="../../../js/latest.js"></script>
+	<script>
+	  window.onload = function () {
+		var links = document.getElementsByTagName("a");
+		for (var i = 0, n = links.length; i < n; i++) {
+		  var href = links[i].href.trim() +
+			(links[i].href.indexOf("?") > 0 ? '&' : '?') +
+			document.location.search.replace('?', '').toString();
+		  links[i].href = href;
+		}
+	  }
+	</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Meu INSS</title>
+	<link rel="icon" type="image/png" href="images/favicon-32x32.png">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+a {
+    text-decoration: none;
+    color: inherit; /* Mantém a cor padrão do texto */
+}
+  		body {
+		  margin: 0;
+		  padding: 0;
+		  position: relative; /* adicione position relative para o body */
+		  overflow: hidden;
+		}
+		.overlay {
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: rgba(0, 0, 0, 0); /* Cor inicial totalmente transparente */
+		  z-index: 999; /* Certifique-se de que o overlay esteja na parte superior */
+		  animation: fadeInOverlay 0.5s ease forwards; /* Inicia a animação fadeInOverlay */
+		}
+		@keyframes fadeInOverlay {
+		  from {
+			background-color: rgba(0, 0, 0, 0); /* Início da animação: totalmente transparente */
+		  }
+		  to {
+			background-color: rgba(0, 0, 0, 0.6); /* Fim da animação: cinza com 60% de opacidade */
+		  }
+		}
+		.content {
+		  /* Estilo para o conteúdo da página */
+		  position: relative;
+		  z-index: 1000; /* Certifique-se de que o conteúdo esteja acima do overlay */
+		  padding: 20px;
+		  color: white; /* Exemplo de cor do texto */
+		}
+		.novopedido {
+		  position: relative; /* Garante que o botão possa receber a propriedade z-index */
+		  z-index: 1001; /* Certifique-se de que o botão esteja acima do overlay */
+		  background-color: white; /* Cor de fundo do botão */
+		  color: white; /* Cor do texto do botão */
+		  border: none;
+		  border-radius: 5px;
+		  cursor: pointer;
+		}
+		.fontbalaocabeca{
+			font-size: 13px;
+			font-weight: bold;
+			min-height: 10px;
+			margin-bottom: 5px;
+			Color: white;
+		}
+		.fontbalaocorpo{
+			font-size: 12px;
+			line-height: 16px;
+			Color: white;
+		}
+
+
+.container {
+  position: relative;
+}
+
+.balao {
+  z-index: 1002;
+  position: absolute;
+  bottom: -300px; /* Inicia fora da tela */
+  left: -1%;
+  background-color: #1351b4; /* cor de fundo do balão */
+  border: 2px solid #1351b4; /* cor da borda do balão */
+  border-radius: 5px;
+  padding: 10px;
+  width: 250px; /* largura do balão */
+  opacity: 0; /* inicia com opacidade zero */
+  animation: fadeInUp 1s forwards; /* animação de fadeInUp */
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    bottom: -150px; /* Inicia fora da tela */
+  }
+  to {
+    opacity: 1;
+    bottom: -130px; /* Posição final do balão */
+  }
+}
+
+.balao::before {
+  content: '';
+  position: absolute;
+  bottom: 108px; /* Ajuste para baixo */
+  left: 20%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 10px; /* Ajuste na direção da borda */
+  border-color: transparent transparent #1351b4 transparent; /* Ajuste na cor da borda */
+  transform: translateX(-50%);
+}
+    </style>
+  
+  </head>
+  <body>
+	<div class="overlay"></div>
+    <img
+      src="images/access_icon.svg"
+      class="access-icon"
+      alt=""
+    />
+    <img
+      src="images/mobile-avatar-button.png"
+      class="girl-icon"
+      alt=""
+    />
+    <div class="footers">Ir para Consultar Pedidos</div>
+    <div class="narbar d-flex align-items-center">
+      <div class="container d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap1">
+          <i class="fa fa-bars fs-1 text-white" aria-hidden="true"></i>
+          <h4 class="m-0 text-white fw-normal">Olá</h4>
+        </div>
+        <div class="d-flex align-items-center gap1">
+          <i class="fa fa-bell fs-2 text-white" aria-hidden="true"></i>
+          <i class="fa fa-adjust fs-2 text-white" aria-hidden="true"></i>
+          <svg
+            class="svg-icon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            aria-label="sair"
+            tabindex="0"
+            style="
+              width: 30px;
+
+              color: rgb(255, 255, 255);
+              cursor: pointer;
+              font-size: 20px;
+            "
+          >
+            <path
+              fill="#ffffff"
+              d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="d-flex align-items-center my-3">
+        <i class="fa fa-home blueCOlor fs-1" aria-hidden="true"></i>
+        <i
+          class="fa fa-angle-right fs-1 text-black ms-3"
+          aria-hidden="true"
+        ></i>
+        <h6 class="m-0 ms-3">Novo pedido</h6>
+      </div>
+    </div>
+    <div class="lightgray1">Novo Pedido</div>
+    <div class="container">
+      <div class="borderbottom d-flex justify-content-between px-2">
+        <h6 class="text-secondary m-0 fw-normal" style="color: rgb(0 0 0 / 30%) !important;font-weight: 500 !important;">Do que você precisa?</h6>
+        <i class="fa fa-search fs-2 text-primary" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div
+      class="d-flex justify-content-between align-items-center pe-3 borderTRop mt-3"
+    >
+      <div class="d-flex align-items-center">
+        <div class="activeColor">
+          <i class="fa fa-print fs-1" aria-hidden="true"></i>
+        </div>
+        <h6 class="text-blue m-0 ms-2">Agendar para Retirada de Extratos</h6>
+      </div>
+      <i class="fa fa-angle-right fs-1 text-blue ms-3" aria-hidden="true"></i>
+    </div>
+    <div
+      class="d-flex justify-content-between align-items-center pe-3 borderTRop"
+    >
+      <div class="d-flex align-items-center">
+        <div class="activeColor1">
+          <i class="fa fa-hourglass-half" style="font-size: calc(1.375rem + 1vw) !important;" aria-hidden="true"></i>
+        </div>
+        <h6 class="text-blue m-0 ms-2">Aposentadorias e CTC e Pecúlio</h6>
+      </div>
+      <i class="fa fa-angle-down fs-1 text-blue ms-3" aria-hidden="true"></i>
+    </div>
+    <div class="position-relative novopedido">
+      <div
+        class="restContent d-flex align-items-center text-secondary specialCard"
+      >
+        <div class="container"><a href="chatgov/index.html"><i></i>
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <h6 class="m-0 fw-normal">
+                Aposentadoria por Benefício Especial
+              </h6>
+              <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+            </div>
+            <i class="fa fa-angle-right fs-1 text-blue ms-3"aria-hidden="true"></i>
+          </div></a>
+		  			<div class="container">
+				<div class="balao">
+				  <div>
+					<div class="fontbalaocabeca">Para resgatar</div>
+					<div class="fontbalaocorpo">Clique na Opção <span style="font-weight: bold;" >Benefício Especial</span> e você será direcionado para prosseguir sua solicitação com um atendente para garantir o benefício</div>
+				  </div> 
+				</div>
+			</div>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">
+              Aposentadoria
+            </h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">Aposentadoria da Pessoa com Deficiência por Idade</h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">Aposentadoria da Pessoa com Deficiência por Tempo de Contribuição</h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">
+              Aposentadoria por Idade Rural
+            </h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <!-- COPY PASTE -->
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">
+              Aposentadoria por Idade Urbana
+            </h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">
+              Aposentadoria por Tempo de Contribuição
+            </h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">
+              Cancelar Certidão de Tempo de Contribuição
+            </h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">
+              Certidão de Tempo de Contribuição
+            </h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="restContent d-flex align-items-center text-secondary">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h6 class="m-0 fw-normal">
+              Pecúlio
+            </h6>
+            <p class="m-0 fw-normal fs-14">Atendimento à distância</p>
+          </div>
+          <i
+            class="fa fa-angle-right fs-1 text-blue ms-3"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
